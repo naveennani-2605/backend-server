@@ -5,6 +5,7 @@ const path = require("path");
 
 const router = express.Router();
 
+// Multer Storage
 const storage = multer.diskStorage({
   destination: "uploads/",
   filename: (req, file, cb) => {
@@ -14,7 +15,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Add product
+// Add Product
 router.post("/add-product", upload.single("image"), async (req, res) => {
   try {
     const { title, description, price } = req.body;
@@ -27,18 +28,19 @@ router.post("/add-product", upload.single("image"), async (req, res) => {
     });
 
     await product.save();
-    res.json({ message: "Product Added" });
-  } catch (err) {
+    res.json({ message: "Product Added Successfully" });
+
+  } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
 });
 
-// Get products
+// Get Products
 router.get("/products", async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);
-  } catch (err) {
+  } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
 });
