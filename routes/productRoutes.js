@@ -35,19 +35,6 @@ router.post("/add-product", upload.single("image"), async (req, res) => {
   }
 });
 
-// Delete Product
-router.delete("/delete-product/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    await Product.findByIdAndDelete(id);
-
-    res.json({ message: "Product Deleted Successfully" });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to delete product" });
-  }
-});
-
 // Get Products
 router.get("/products", async (req, res) => {
   try {
