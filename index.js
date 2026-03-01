@@ -11,7 +11,10 @@ const app = express();
 
 // CORS
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: [
+    "http://localhost:5173",
+    "https://startup-products-post.netlify.app"
+  ],
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"]
 }));
